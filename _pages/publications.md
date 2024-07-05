@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /publications/
-title: Awards
+title: Publications
 description: 
 nav: true
 nav_order:
