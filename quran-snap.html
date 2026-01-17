@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuranSnap - Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1a5f4a 0%, #2d8a6e 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        [lang="ar"] body {
+            font-family: 'Segoe UI', 'Tahoma', 'Geneva', 'Verdana', sans-serif;
+            direction: rtl;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .lang-switch {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+
+        [lang="ar"] .lang-switch {
+            right: auto;
+            left: 20px;
+        }
+
+        .lang-switch:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1a5f4a 0%, #2d8a6e 100%);
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 50px 40px;
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, #D4AF37 0%, #f4d03f 100%);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin-bottom: 50px;
+            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
+        }
+
+        .contact-box h2 {
+            color: #1a5f4a;
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .contact-box p {
+            color: #1a5f4a;
+            font-size: 1.1em;
+            margin-bottom: 20px;
+        }
+
+        .email-button {
+            display: inline-block;
+            background: #1a5f4a;
+            color: white;
+            padding: 15px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(26, 95, 74, 0.3);
+        }
+
+        .email-button:hover {
+            background: #2d8a6e;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 20px rgba(26, 95, 74, 0.4);
+        }
+
+        .section {
+            margin-bottom: 50px;
+        }
+
+        .section h2 {
+            color: #1a5f4a;
+            font-size: 2em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #D4AF37;
+        }
+
+        .about-text {
+            font-size: 1.1em;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .faq-item {
+            background: #f8f9fa;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #D4AF37;
+            transition: all 0.3s ease;
+        }
+
+        [lang="ar"] .faq-item {
+            border-left: none;
+            border-right: 4px solid #D4AF37;
+        }
+
+        .faq-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        [lang="ar"] .faq-item:hover {
+            transform: translateX(-5px);
+        }
+
+        .faq-item h3 {
+            color: #1a5f4a;
+            font-size: 1.3em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-item h3::before {
+            content: "Q:";
+            background: #D4AF37;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 5px;
+            margin-right: 15px;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+
+        [lang="ar"] .faq-item h3::before {
+            content: "س:";
+            margin-right: 0;
+            margin-left: 15px;
+        }
+
+        .faq-item p {
+            color: #666;
+            font-size: 1.05em;
+            margin-left: 47px;
+        }
+
+        [lang="ar"] .faq-item p {
+            margin-left: 0;
+            margin-right: 47px;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card .icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+
+        .feature-card h3 {
+            color: #1a5f4a;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .feature-card p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px 40px;
+            text-align: center;
+            color: #666;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .footer a {
+            color: #1a5f4a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .footer a:hover {
+            color: #2d8a6e;
+            text-decoration: underline;
+        }
+
+        [lang="en"] [data-lang="ar"],
+        [lang="ar"] [data-lang="en"] {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            .content {
+                padding: 30px 20px;
+            }
+            .contact-box {
+                padding: 30px 20px;
+            }
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="lang-switch" onclick="toggleLanguage()">
+            <span data-lang="en">العربية</span>
+            <span data-lang="ar">English</span>
+        </button>
+
+        <div class="header">
+            <h1>
+                <span data-lang="en">🎧 QuranSnap</span>
+                <span data-lang="ar">🎧 QuranSnap</span>
+            </h1>
+            <p>
+                <span data-lang="en">Shazam for Quran - Identify any verse instantly</span>
+                <span data-lang="ar">شازام للقرآن - تعرّف على أي آية فوراً</span>
+            </p>
+        </div>
+
+        <div class="content">
+            <div class="contact-box">
+                <h2>
+                    <span data-lang="en">📧 Need Help?</span>
+                    <span data-lang="ar">📧 هل تحتاج مساعدة؟</span>
+                </h2>
+                <p>
+                    <span data-lang="en">We're here to help you on your Quran journey</span>
+                    <span data-lang="ar">نحن هنا لمساعدتك في رحلتك مع القرآن</span>
+                </p>
+                <a href="mailto:kalycodes@gmail.com" class="email-button">
+                    <span data-lang="en">Contact Support</span>
+                    <span data-lang="ar">تواصل مع الدعم</span>
+                </a>
+                <p style="margin-top: 20px; font-size: 0.95em;">
+                    <span data-lang="en">We typically respond within 24-48 hours</span>
+                    <span data-lang="ar">نرد عادةً خلال 24-48 ساعة</span>
+                </p>
+            </div>
+
+            <div class="section">
+                <h2>
+                    <span data-lang="en">About QuranSnap</span>
+                    <span data-lang="ar">عن QuranSnap</span>
+                </h2>
+                <p class="about-text">
+                    <span data-lang="en">
+                        QuranSnap is the Shazam for Quran. Simply let the app listen to any Quran recitation, 
+                        and it will instantly identify the exact verse being recited. Get translations, 
+                        tafsir (commentary), and save verses to revisit later. Perfect for when you hear 
+                        beautiful recitation and want to know which verse it is.
+                    </span>
+                    <span data-lang="ar">
+                        QuranSnap هو شازام للقرآن. ببساطة دع التطبيق يستمع لأي تلاوة قرآنية،
+                        وسيتعرف فوراً على الآية التي تُتلى. احصل على الترجمات والتفسير،
+                        واحفظ الآيات للرجوع إليها لاحقاً. مثالي عندما تسمع تلاوة جميلة
+                        وتريد معرفة أي آية هي.
+                    </span>
+                </p>
+
+                <div class="features">
+                    <div class="feature-card">
+                        <div class="icon">🎤</div>
+                        <h3>
+                            <span data-lang="en">Instant Recognition</span>
+                            <span data-lang="ar">تعرّف فوري</span>
+                        </h3>
+                        <p>
+                            <span data-lang="en">Identify any Quran verse from audio in seconds</span>
+                            <span data-lang="ar">تعرّف على أي آية قرآنية من الصوت في ثوانٍ</span>
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">🌍</div>
+                        <h3>
+                            <span data-lang="en">Translations</span>
+                            <span data-lang="ar">ترجمات</span>
+                        </h3>
+                        <p>
+                            <span data-lang="en">Read verses in multiple languages</span>
+                            <span data-lang="ar">اقرأ الآيات بلغات متعددة</span>
+                        </p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="icon">📖</div>
+                        <h3>
+                            <span data-lang="en">Tafsir</span>
+                            <span data-lang="ar">تفسير</span>
+                        </h3>
+                        <p>
+                            <span data-lang="en">Understand verses with scholarly commentary</span>
+                            <span data-lang="ar">افهم الآيات مع تفسير العلماء</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>
+                    <span data-lang="en">Frequently Asked Questions</span>
+                    <span data-lang="ar">الأسئلة الشائعة</span>
+                </h2>
+
+                <div class="faq-item">
+                    <h3>
+                        <span data-lang="en">How does QuranSnap work?</span>
+                        <span data-lang="ar">كيف يعمل QuranSnap؟</span>
+                    </h3>
+                    <p>
+                        <span data-lang="en">
+                            Tap the listen button and let QuranSnap hear the recitation. The app converts 
+                            the audio to text and matches it against our complete Quran database to identify 
+                            the exact verse, surah, and ayah number.
+                        </span>
+                        <span data-lang="ar">
+                            اضغط على زر الاستماع ودع QuranSnap يسمع التلاوة. يحول التطبيق
+                            الصوت إلى نص ويطابقه مع قاعدة بيانات القرآن الكاملة للتعرف
+                            على الآية والسورة ورقم الآية بالضبط.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>
+                        <span data-lang="en">Why does the app need microphone access?</span>
+                        <span data-lang="ar">لماذا يحتاج التطبيق إلى الوصول للميكروفون؟</span>
+                    </h3>
+                    <p>
+                        <span data-lang="en">
+                            The microphone is used only to listen to Quran recitations for identification. 
+                            Audio is processed locally on your device and is never stored or sent to any server. 
+                            Your privacy is fully protected.
+                        </span>
+                        <span data-lang="ar">
+                            يُستخدم الميكروفون فقط للاستماع إلى تلاوات القرآن للتعرف عليها.
+                            تتم معالجة الصوت محلياً على جهازك ولا يتم تخزينه أو إرساله إلى أي خادم.
+                            خصوصيتك محمية بالكامل.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>
+                        <span data-lang="en">Does it work with any reciter?</span>
+                        <span data-lang="ar">هل يعمل مع أي قارئ؟</span>
+                    </h3>
+                    <p>
+                        <span data-lang="en">
+                            Yes! QuranSnap works with any reciter - whether it's a famous qari, your local imam, 
+                            or someone reciting at home. The technology recognizes the Arabic text being recited, 
+                            not the voice itself.
+                        </span>
+                        <span data-lang="ar">
+                            نعم! يعمل QuranSnap مع أي قارئ - سواء كان قارئاً مشهوراً أو إمام مسجدك المحلي
+                            أو شخصاً يتلو في المنزل. تتعرف التقنية على النص العربي المُتلى،
+                            وليس الصوت نفسه.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>
+                        <span data-lang="en">What's included in Premium?</span>
+                        <span data-lang="ar">ماذا يتضمن الاشتراك المميز؟</span>
+                    </h3>
+                    <p>
+                        <span data-lang="en">
+                            Premium gives you unlimited verse identifications, full tafsir access, 
+                            multiple translations, and the ability to save unlimited bookmarks. 
+                            Free users have a limited number of daily identifications.
+                        </span>
+                        <span data-lang="ar">
+                            يمنحك الاشتراك المميز تعرّفاً غير محدود على الآيات، ووصولاً كاملاً للتفسير،
+                            وترجمات متعددة، والقدرة على حفظ إشارات مرجعية غير محدودة.
+                            للمستخدمين المجانيين عدد محدود من التعرّفات اليومية.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>
+                        <span data-lang="en">How do I cancel my subscription?</span>
+                        <span data-lang="ar">كيف ألغي اشتراكي؟</span>
+                    </h3>
+                    <p>
+                        <span data-lang="en">
+                            On iPhone: Go to Settings → Your Name → Subscriptions → QuranSnap → Cancel.
+                            On Android: Go to Play Store → Menu → Subscriptions → QuranSnap → Cancel.
+                            You'll keep access until the end of your billing period.
+                        </span>
+                        <span data-lang="ar">
+                            على الآيفون: اذهب إلى الإعدادات ← اسمك ← الاشتراكات ← QuranSnap ← إلغاء.
+                            على أندرويد: اذهب إلى متجر Play ← القائمة ← الاشتراكات ← QuranSnap ← إلغاء.
+                            ستحتفظ بالوصول حتى نهاية فترة الفوترة.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>
+                        <span data-lang="en">Does it work offline?</span>
+                        <span data-lang="ar">هل يعمل بدون إنترنت؟</span>
+                    </h3>
+                    <p>
+                        <span data-lang="en">
+                            The core identification feature requires an internet connection for processing. 
+                            However, your saved bookmarks and previously identified verses can be viewed offline.
+                        </span>
+                        <span data-lang="ar">
+                            تتطلب ميزة التعرّف الأساسية اتصالاً بالإنترنت للمعالجة.
+                            ومع ذلك، يمكن عرض الإشارات المرجعية المحفوظة والآيات التي تم التعرف عليها سابقاً بدون اتصال.
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>
+                    <span data-lang="en">Troubleshooting</span>
+                    <span data-lang="ar">استكشاف الأخطاء وإصلاحها</span>
+                </h2>
+
+                <div class="faq-item">
+                    <h3>
+                        <span data-lang="en">App not recognizing the recitation</span>
+                        <span data-lang="ar">التطبيق لا يتعرف على التلاوة</span>
+                    </h3>
+                    <p>
+                        <span data-lang="en">
+                            Make sure you're in a quiet environment with clear audio. Hold your phone closer 
+                            to the audio source. The recitation should be clear Arabic Quran text - background 
+                            music or heavy echo may affect recognition.
+                        </span>
+                        <span data-lang="ar">
+                            تأكد من أنك في بيئة هادئة مع صوت واضح. أمسك هاتفك أقرب
+                            إلى مصدر الصوت. يجب أن تكون التلاوة نصاً قرآنياً عربياً واضحاً -
+                            الموسيقى الخلفية أو الصدى القوي قد يؤثر على التعرف.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>
+                        <span data-lang="en">Microphone permission denied</span>
+                        <span data-lang="ar">تم رفض إذن الميكروفون</span>
+                    </h3>
+                    <p>
+                        <span data-lang="en">
+                            Go to your device Settings → QuranSnap → Enable Microphone. 
+                            The app cannot identify verses without microphone access.
+                        </span>
+                        <span data-lang="ar">
+                            اذهب إلى إعدادات جهازك ← QuranSnap ← تفعيل الميكروفون.
+                            لا يمكن للتطبيق التعرف على الآيات بدون الوصول للميكروفون.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>
+                        <span data-lang="en">Subscription not showing</span>
+                        <span data-lang="ar">الاشتراك لا يظهر</span>
+                    </h3>
+                    <p>
+                        <span data-lang="en">
+                            Try restoring purchases from the settings menu. Make sure you're signed in with 
+                            the same Apple ID or Google account used for the purchase. If the issue persists, 
+                            contact us with your purchase receipt.
+                        </span>
+                        <span data-lang="ar">
+                            حاول استعادة المشتريات من قائمة الإعدادات. تأكد من تسجيل الدخول بنفس
+                            حساب Apple ID أو Google المستخدم للشراء. إذا استمرت المشكلة،
+                            تواصل معنا مع إيصال الشراء.
+                        </span>
+                    </p>
+                </div>
+
+                <div class="faq-item">
+                    <h3>
+                        <span data-lang="en">App crashes or freezes</span>
+                        <span data-lang="ar">التطبيق يتوقف أو يتجمد</span>
+                    </h3>
+                    <p>
+                        <span data-lang="en">
+                            Please email us with your device model, OS version, and a description of what 
+                            you were doing when the crash occurred. We'll investigate and fix it promptly.
+                        </span>
+                        <span data-lang="ar">
+                            يرجى مراسلتنا عبر البريد الإلكتروني مع ذكر طراز جهازك وإصدار نظام التشغيل ووصف لما
+                            كنت تفعله عند حدوث التوقف. سنقوم بالتحقيق وإصلاح الأمر فوراً.
+                        </span>
+                    </p>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>
+                    <span data-lang="en">Report a Bug</span>
+                    <span data-lang="ar">الإبلاغ عن خطأ</span>
+                </h2>
+                <p class="about-text">
+                    <span data-lang="en">
+                        Found a bug? We'd love to hear about it so we can make QuranSnap better for everyone. 
+                        Please email us at <a href="mailto:kalycodes@gmail.com" style="color: #1a5f4a; font-weight: 600;">kalycodes@gmail.com</a> with:
+                    </span>
+                    <span data-lang="ar">
+                        هل وجدت خطأ؟ نود أن نسمع منك لنجعل QuranSnap أفضل للجميع.
+                        يرجى مراسلتنا على <a href="mailto:kalycodes@gmail.com" style="color: #1a5f4a; font-weight: 600;">kalycodes@gmail.com</a> مع ذكر:
+                    </span>
+                </p>
+                <ul style="margin: 20px 0 0 40px; color: #666; font-size: 1.05em;">
+                    <li><span data-lang="en">Your device model (e.g., iPhone 15, Samsung S24)</span><span data-lang="ar">طراز جهازك (مثلاً: iPhone 15, Samsung S24)</span></li>
+                    <li><span data-lang="en">iOS or Android version</span><span data-lang="ar">إصدار iOS أو Android</span></li>
+                    <li><span data-lang="en">App version</span><span data-lang="ar">إصدار التطبيق</span></li>
+                    <li><span data-lang="en">Description of the issue</span><span data-lang="ar">وصف المشكلة</span></li>
+                    <li><span data-lang="en">Steps to reproduce the bug</span><span data-lang="ar">خطوات تكرار الخطأ</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>
+                <a href="privacy-policy.html"><span data-lang="en">Privacy Policy</span><span data-lang="ar">سياسة الخصوصية</span></a> | 
+                <a href="terms-of-service.html"><span data-lang="en">Terms of Service</span><span data-lang="ar">شروط الخدمة</span></a>
+            </p>
+            <p style="margin-top: 10px;">
+                <span data-lang="en">© 2025 QuranSnap. All rights reserved.</span>
+                <span data-lang="ar">© 2025 QuranSnap. جميع الحقوق محفوظة.</span>
+            </p>
+            <p style="margin-top: 5px; font-size: 0.9em;">
+                <span data-lang="en">Built with ❤️ to help you discover the Quran</span>
+                <span data-lang="ar">صُنع بـ ❤️ لمساعدتك على اكتشاف القرآن</span>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function toggleLanguage() {
+            const html = document.documentElement;
+            const currentLang = html.getAttribute('lang');
+            const newLang = currentLang === 'en' ? 'ar' : 'en';
+            html.setAttribute('lang', newLang);
+            localStorage.setItem('language', newLang);
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('language') || 'en';
+            document.documentElement.setAttribute('lang', savedLang);
+        });
+    </script>
+</body>
+</html>
